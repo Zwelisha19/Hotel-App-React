@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
@@ -144,7 +145,108 @@ const RoomsList = () => {
 };
 
 export default RoomsList;
+*/
 
+
+
+
+import React, { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { database } from '../config/firebaseConfig';
+import { useAuth } from '../../context/AuthContext'; // Import AuthContext to check login status
+import './RoomList.css';
+
+const RoomsList = () => {
+  const [rooms, setRooms] = useState([]);
+  const [checkinDate, setCheckinDate] = useState('');
+  const [checkoutDate, setCheckoutDate] = useState('');
+  const [guests, setGuests] = useState(1); 
+  const { currentUser } = useAuth(); // Access currentUser from AuthContext
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(database, 'rooms'));
+        const roomsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setRooms(roomsData);
+      } catch (err) {
+        console.error('Failed to fetch rooms:', err);
+      }
+    };
+
+    fetchRooms();
+
+    // Set check-in date to today's date or the date passed via state
+    const today = new Date();
+    const bookingDate = location.state?.bookingDate || today;
+    setCheckinDate(bookingDate.toISOString().split('T')[0]);
+  }, [location.state]);
+
+  const handleCheckoutChange = (e) => {
+    const selectedCheckoutDate = e.target.value;
+    if (new Date(selectedCheckoutDate) <= new Date(checkinDate)) {
+      alert("Check-out date must be after check-in date.");
+      setCheckoutDate(''); // Reset checkout date
+    } else {
+      setCheckoutDate(selectedCheckoutDate);
+    }
+  };
+
+  const handleBookNow = (room) => {
+    if (!checkinDate || !checkoutDate) {
+      alert("Please select both check-in and check-out dates before booking.");
+      return;
+    }
+
+    // Check if user is logged in
+    if (!currentUser) {
+      // If not logged in, redirect to login and pass the booking data
+      navigate('/login', { 
+        state: { 
+          checkinDate, 
+          checkoutDate, 
+          guests, 
+          room 
+        } 
+      });
+      return;
+    }
+
+    // If logged in, navigate to booking summary
+    navigate(`/booking-summary`, { 
+      state: { 
+        checkinDate, 
+        checkoutDate, 
+        guests, 
+        room 
+      } 
+    });
+  };
+
+  const today = new Date().toISOString().split('T')[0];
+
+  return (
+    <div className="rooms-list-container">
+      {/* Your RoomList JSX structure */}
+      {rooms.map(room => (
+        <div key={room.id} className="room-item">
+          {/* Room details */}
+          <button className='book-btn' onClick={() => handleBookNow(room)}>
+            Book Now
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default RoomsList;
 
 
 
