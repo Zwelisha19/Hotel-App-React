@@ -306,6 +306,41 @@ footer {
     text-decoration: underline;
 }
 
+.login-message {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 10px;
+    border: 1px solid #f5c6cb; /* Light red border */
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.book-now-btn {
+    /*
+    background-color: #007bff; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    */
+
+    width: 85px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    background-color: #768F66;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+
+
+}
+
+.book-now-btn:hover {
+    background-color: #87cf5a;
+}
 
 /* Responsive styles */
 @media (max-width: 1200px) {

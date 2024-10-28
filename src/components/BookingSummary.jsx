@@ -125,14 +125,14 @@ export default BookingSummary;
 
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './BookingSummary.css'; // Make sure this path is correct
+import './BookingSummary.css'; 
 
 const BookingSummary = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { checkinDate, checkoutDate, guests, room } = location.state || {};
 
-  // Calculate nights and total price
+  
   const checkIn = new Date(checkinDate);
   const checkOut = new Date(checkoutDate);
   const numberOfNights = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
@@ -144,13 +144,13 @@ const BookingSummary = () => {
         checkinDate, 
         checkoutDate, 
         guests, 
-        room // Pass the room object here
+        room 
       } 
     });
   };
 
   const handleBackToRooms = () => {
-    navigate('/RoomsList'); // Adjust the path according to your routing setup
+    navigate('/RoomsList'); 
   };
 
   return (
