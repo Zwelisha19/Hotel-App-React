@@ -1,0 +1,69 @@
+.booking-summary {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Limit width for better readability */
+    margin: auto; /* Center the component */
+  }
+  
+  .booking-summary h1 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #333;
+    text-align: center; /* Center the title */
+  }
+  
+  .booking-summary p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #555;
+  }
+  
+  .booking-summary .details {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+  }
+  
+  .booking-summary .details p {
+    font-weight: bold; /* Highlight detail labels */
+    color: #333;
+  }
+  
+  .booking-summary .summary-value {
+    color: #007BFF; /* Accent color for values */
+  }
+  
+  .booking-summary button {
+    width: 100%;
+    padding: 12px;
+    background-color: #55BAF2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .booking-summary button:hover {
+    background-color: #4b9ed9; /* Darker shade on hover */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .booking-summary {
+      padding: 15px;
+    }
+  
+    .booking-summary h1 {
+      font-size: 1.5em;
+    }
+  
+    .booking-summary button {
+      font-size: 1em;
+    }
+  }
+  
