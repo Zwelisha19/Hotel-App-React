@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -32,7 +22,8 @@ const RoomsList = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        setRooms(roomsData);
+
+        setRooms(roomsData); 
       } catch (err) {
         console.error('Failed to fetch rooms:', err);
       }
@@ -61,8 +52,11 @@ const RoomsList = () => {
       return;
     }
 
+    if (!room.status) {
+      alert("This room is currently unavailable for booking.");
+      return;
+    }
 
-    
     navigate(`/booking-summary`, { 
       state: { 
         checkinDate, 
@@ -122,33 +116,45 @@ const RoomsList = () => {
       </div>
 
       <div className="rooms-list">
-        {rooms.map(room => (
-          <div key={room.id} className="room-item">
-            <div className='title-image-div'>
-              <h1>{room.name}</h1>
-              <div className='room-image-div'>
-                <img src={room.image} alt="Room" />
-              </div>
-            </div>
-            <div className='room-details-div'>
-              <div className='room-description-div'>
-                <p>{room.description}</p>
-              </div>
-              <div className='room-price-div'>
-                <div className='number-of-guests-div'>
-                  <p>Max Guests: 4</p>
-                </div>
-                <div className='price-book-now-button-div'>
-                  <p className='price-text'>
-                    <strong>R{room.price}</strong><br />
-                    per night
-                  </p>
-                  <button className='book-btn' onClick={() => handleBookNow(room)}>Book Now</button>
+        {rooms.length > 0 ? (
+          rooms.map(room => (
+            <div key={room.id} className={`room-item ${!room.status ? 'room-unavailable' : ''}`}>
+              <div className='title-image-div'>
+                <h1>{room.name}</h1>
+                <div className='room-image-div'>
+                  <img src={room.image} alt="Room" />
                 </div>
               </div>
+              <div className='room-details-div'>
+                <div className='room-description-div'>
+                  <p>{room.description}</p>
+                </div>
+                <div className='room-price-div'>
+                  <div className='number-of-guests-div'>
+                    <p>Max Guests: {room.beds}</p>
+                  </div>
+                  <div className='price-book-now-button-div'>
+                    <p className='price-text'>
+                      <strong>R{room.price}</strong><br />
+                      per night
+                    </p>
+                    <button 
+                      className='book-btn' 
+                      onClick={() => handleBookNow(room)} 
+                    
+                    >
+                      Book Now
+                    </button>
+                 
+                    {!room.status && <p className="unavailable-text">Currently Unavailable</p>}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No rooms available.</p>
+        )}
       </div>
     </div>
   );
@@ -156,123 +162,6 @@ const RoomsList = () => {
 
 export default RoomsList;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { database } from '../config/firebaseConfig';
-import { useAuth } from '../context/AuthContext'; 
-import './RoomList.css';
-
-const RoomsList = () => {
-  const [rooms, setRooms] = useState([]);
-  const [checkinDate, setCheckinDate] = useState('');
-  const [checkoutDate, setCheckoutDate] = useState('');
-  const [guests, setGuests] = useState(1); 
-  const { currentUser } = useAuth(); 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(database, 'rooms'));
-        const roomsData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setRooms(roomsData);
-      } catch (err) {
-        console.error('Failed to fetch rooms:', err);
-      }
-    };
-
-    fetchRooms();
-
-
-    const today = new Date();
-    const bookingDate = location.state?.bookingDate || today;
-    setCheckinDate(bookingDate.toISOString().split('T')[0]);
-  }, [location.state]);
-
-  const handleCheckoutChange = (e) => {
-    const selectedCheckoutDate = e.target.value;
-    if (new Date(selectedCheckoutDate) <= new Date(checkinDate)) {
-      alert("Check-out date must be after check-in date.");
-      setCheckoutDate(''); 
-    } else {
-      setCheckoutDate(selectedCheckoutDate);
-    }
-  };
-
-  const handleBookNow = (room) => {
-    if (!checkinDate || !checkoutDate) {
-      alert("Please select both check-in and check-out dates before booking.");
-      return;
-    }
-
-   
-    if (!currentUser) {
-     
-      navigate('Login', { 
-        state: { 
-          checkinDate, 
-          checkoutDate, 
-          guests, 
-          room 
-        } 
-      });
-      return;
-    }
-
-   
-    navigate(`/booking-summary`, { 
-      state: { 
-        checkinDate, 
-        checkoutDate, 
-        guests, 
-        room 
-      } 
-    });
-  };
-
-  const today = new Date().toISOString().split('T')[0];
-
-  return (
-    <div className="rooms-list-container">
-  
-      {rooms.map(room => (
-        <div key={room.id} className="room-item">
-        
-          <button className='book-btn' onClick={() => handleBookNow(room)}>
-            Book Now
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default RoomsList;
-
-
-*/
 
 
 
