@@ -10,9 +10,9 @@ import TermsAndConditions from './Pages/TermsAndConditions';
 import Login from './Pages/Login'; 
 import UserProfile from './Pages/UserProfile';
 import SignUp from './Pages/SignUp';
-import UpdateProfile from './components/UpdateProfile'; // Import UpdateProfile
+import UpdateProfile from './components/UpdateProfile'; 
 import BookingHistory from './components/BookingHistory'; 
-import RateHotel from './components/RateHotel'; // Import RateHotel
+import RateHotel from './components/RateHotel'; 
 import { AuthProvider } from './context/AuthContext'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
 import NotFound from './Pages/NotFound'; 
@@ -30,7 +30,7 @@ function App() {
             <Route path="/UserProfile" element={<UserProfile />} /> 
 
             <Route 
-              path="/UpdateProfile"  // Add a new route for UpdateProfile
+              path="/UpdateProfile"  
               element={
                 <ProtectedRoute>
                   <UpdateProfile />
@@ -39,7 +39,7 @@ function App() {
             />
 
             <Route 
-              path="/RateHotel" // Add a route for RateHotel
+              path="/RateHotel" 
               element={
                 <ProtectedRoute>
                   <RateHotel />

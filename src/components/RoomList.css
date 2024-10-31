@@ -64,6 +64,31 @@
   padding: 5px;
 }
 
+
+.search-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none; 
+  border-radius: 5px;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+.search-button:hover {
+  background-color: #45a049;
+}
+
+.search-button:focus {
+  outline: none; 
+}
+
+.search-button:disabled {
+  background-color: #cccccc; 
+  cursor: not-allowed; 
+}
+
 .submit-btn {
   width: 200px;
   height: 40px;

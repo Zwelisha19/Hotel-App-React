@@ -7,9 +7,11 @@ import './RoomList.css';
 
 const RoomsList = () => {
   const [rooms, setRooms] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
   const [checkinDate, setCheckinDate] = useState('');
   const [checkoutDate, setCheckoutDate] = useState('');
   const [guests, setGuests] = useState(1); 
+  const [maxPrice, setMaxPrice] = useState('');
   const { currentUser } = useAuth(); 
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,8 +24,8 @@ const RoomsList = () => {
           id: doc.id,
           ...doc.data(),
         }));
-
-        setRooms(roomsData); 
+        setRooms(roomsData);
+        setFilteredRooms(roomsData);
       } catch (err) {
         console.error('Failed to fetch rooms:', err);
       }
@@ -65,6 +67,16 @@ const RoomsList = () => {
         room 
       } 
     });
+  };
+
+  const handleSearch = () => {
+    let filtered = rooms;
+
+    if (maxPrice) {
+      filtered = filtered.filter(room => room.price <= maxPrice);
+    }
+
+    setFilteredRooms(filtered);
   };
 
   const today = new Date().toISOString().split('T')[0];
@@ -115,12 +127,22 @@ const RoomsList = () => {
               ))}
             </select>
           </div>
+          <div className='search-div'>
+            <label htmlFor="max-price">Max Price</label>
+            <input
+              type="number"
+              id="max-price"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+            <button className='search-button' onClick={handleSearch}>Search</button>
+          </div>
         </div>
       </div>
 
       <div className="rooms-list">
-        {rooms.length > 0 ? (
-          rooms.map(room => (
+        {filteredRooms.length > 0 ? (
+          filteredRooms.map(room => (
             <div key={room.id} className={`room-item ${!room.status ? 'room-unavailable' : ''}`}>
               <div className='title-image-div'>
                 <h1>{room.name}</h1>
@@ -144,11 +166,9 @@ const RoomsList = () => {
                     <button 
                       className='book-btn' 
                       onClick={() => handleBookNow(room)} 
-                    
                     >
                       Book Now
                     </button>
-                 
                     {!room.status && <p className="unavailable-text">Currently Unavailable</p>}
                   </div>
                 </div>
@@ -164,12 +184,6 @@ const RoomsList = () => {
 };
 
 export default RoomsList;
-
-
-
-
-
-
 
 
 
