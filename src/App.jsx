@@ -13,6 +13,7 @@ import SignUp from './Pages/SignUp';
 import UpdateProfile from './components/UpdateProfile'; 
 import BookingHistory from './components/BookingHistory'; 
 import RateHotel from './components/RateHotel'; 
+import ForgotPassword from './Pages/ForgotPassword'; 
 import { AuthProvider } from './context/AuthContext'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
 import NotFound from './Pages/NotFound'; 
@@ -28,59 +29,13 @@ function App() {
             <Route path="/Login" element={<Login />} /> 
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/UserProfile" element={<UserProfile />} /> 
-
-            <Route 
-              path="/UpdateProfile"  
-              element={
-                <ProtectedRoute>
-                  <UpdateProfile />
-                </ProtectedRoute>
-              } 
-            />
-
-            <Route 
-              path="/RateHotel" 
-              element={
-                <ProtectedRoute>
-                  <RateHotel />
-                </ProtectedRoute>
-              } 
-            />
-
-            <Route 
-              path="/booking-summary" 
-              element={
-                <ProtectedRoute>
-                  <BookingSummary />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/Payment" 
-              element={
-                <ProtectedRoute>
-                  <Payment />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/confirmation" 
-              element={
-                <ProtectedRoute>
-                  <Confirmation />
-                </ProtectedRoute>
-              } 
-            />
-
-            <Route 
-              path="/BookingHistory" 
-              element={
-                <ProtectedRoute>
-                  <BookingHistory />
-                </ProtectedRoute>
-              } 
-            />
-
+            <Route path="/ForgotPassword" element={<ForgotPassword />} /> 
+            <Route path="/UpdateProfile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} /> 
+            <Route path="/RateHotel" element={<ProtectedRoute><RateHotel /></ProtectedRoute>} /> 
+            <Route path="/booking-summary" element={<ProtectedRoute><BookingSummary /></ProtectedRoute>} /> 
+            <Route path="/Payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} /> 
+            <Route path="/confirmation" element={<ProtectedRoute><Confirmation /></ProtectedRoute>} /> 
+            <Route path="/BookingHistory" element={<ProtectedRoute><BookingHistory /></ProtectedRoute>} /> 
             <Route path="/terms" element={<TermsAndConditions />} /> 
             <Route path="*" element={<NotFound />} /> 
           </Routes>
@@ -91,6 +46,3 @@ function App() {
 }
 
 export default App;
-
-
-

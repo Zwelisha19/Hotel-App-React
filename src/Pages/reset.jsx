@@ -13,7 +13,7 @@ function ForgotPassword() {
         try {
             await sendPasswordResetEmail(auth, emailVal);  
             alert("Check your email");
-            navigate("/login");
+            navigate("Login");
         } catch (err) {
             alert("Error: " + err.message);
         }
