@@ -9,7 +9,7 @@ const UserProfile = () => {
       <div className="profile-links">
         <Link to="/BookingHistory">Booking History</Link>
         <Link to="/UpdateProfile">Update Profile</Link>
-        <Link to="/rate-hotel">Rate the Hotel</Link>
+        <Link to="/RateHotel">Rate the Hotel</Link>
       </div>
     </div>
   );
