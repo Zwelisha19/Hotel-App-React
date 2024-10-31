@@ -1,4 +1,4 @@
-.booking-history-container {
+ .booking-history-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -32,7 +32,7 @@
   
   h2 {
     margin: 0;
-    color: #007bff;
+    color: green;
   }
   
   p {
@@ -45,4 +45,20 @@
     border: 0;
     border-top: 1px solid #eee;
   }
+   
+
+   .btn {
+    margin-top: 20px; 
+    padding: 10px 15px; 
+    background-color: green; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s; 
+  }
   
+  .btn:hover {
+    background-color: darkgreen; 
+  }
+   
