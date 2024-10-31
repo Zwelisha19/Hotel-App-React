@@ -5,22 +5,22 @@
     justify-content: center;
     height: 100vh;
     text-align: center;
-    background-color: #f8f9fa; /* Light background color */
-    color: #343a40; /* Dark text color */
+    background-color: #f8f9fa; 
+    color: #343a40;
   }
   
   .not-found-container h1 {
-    font-size: 6rem; /* Large font size for 404 */
+    font-size: 6rem; 
     margin: 0;
   }
   
   .not-found-container h2 {
-    font-size: 2rem; /* Subheading font size */
+    font-size: 2rem; 
     margin: 10px 0;
   }
   
   .not-found-container p {
-    font-size: 1.2rem; /* Regular text size */
+    font-size: 1.2rem; 
     margin-bottom: 20px;
   }
   
@@ -28,7 +28,7 @@
     padding: 10px 20px;
     font-size: 1rem;
     color: white;
-    background-color: #007bff; /* Primary button color */
+    background-color: #007bff; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -36,6 +36,6 @@
   }
   
   .not-found-container button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
   }
   

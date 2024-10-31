@@ -21,7 +21,7 @@ const SignUp = () => {
 const validate = () => {
   const newErrors = {};
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/; // Updated pattern
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/; 
 
   if (!email) newErrors.email = 'Email is required';
   else if (!emailPattern.test(email)) newErrors.email = 'Invalid email address';

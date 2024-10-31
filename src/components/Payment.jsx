@@ -11,7 +11,7 @@ const Payment = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [formError, setFormError] = useState('');
 
-  const paymentAmount = (room ? room.price * guests : 0).toFixed(2); // Calculate total price
+  const paymentAmount = (room ? room.price * guests : 0).toFixed(2); 
 
   const handleGoToConfirmation = () => {
     navigate('/confirmation', {

@@ -29,7 +29,7 @@ function TermsAndConditions() {
             <h2>Privacy</h2>
             <p>
                 Your privacy is important to us. We handle your data with care, in line with our
-                <Link to="/privacy-policy"> Privacy Policy</Link>.
+                privacy-policy
             </p>
 
             <h2>Limitation of Liability</h2>

@@ -1,9 +1,12 @@
 
+
+
+  
   body {
-    height: 100%; /* Ensure the body takes full height */
-    margin: 0; /* Remove default margin */
+    height: 100%;
+    margin: 0; 
     padding: 0;
-    background: linear-gradient(to right, #e0f7fa, #ffe0b2); /* Light gradient background */
+    background-color: #f0f4f8; 
   }
   
   .login-container {
@@ -17,17 +20,17 @@
   .login-title {
     font-size: 2.5em;
     margin-bottom: 20px;
-    color: #2e7d32; /* Darker green title color */
-    text-align: center; /* Center title */
+    color: #2e7d32; 
+    text-align: center; 
   }
   
   .login-form {
-    background-color: #ffffff; /* White form background */
+    background-color: #ffffff; 
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Slightly darker shadow */
+    border-radius: 12px; 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); 
     width: 100%;
-    max-width: 400px; /* Max width for the form */
+    max-width: 400px; 
   }
   
   .form-group {
@@ -38,7 +41,7 @@
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #333; /* Dark label color */
+    color: #555; 
   }
   
   .form-input {
@@ -46,18 +49,19 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
   }
   
   .form-input:focus {
-    border-color: #5A7D42; /* Highlight on focus */
+    border-color: #5A7D42; 
     outline: none;
+    box-shadow: 0 0 5px rgba(90, 125, 66, 0.5); 
   }
   
   .login-button {
     width: 100%;
     padding: 10px;
-    background-color: #388e3c; /* Green button color */
+    background-color: #388e3c; 
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -67,7 +71,7 @@
   }
   
   .login-button:hover {
-    background-color: #4caf50; /* Lighter green on hover */
+    background-color: #4caf50; 
     transform: translateY(-1px);
   }
   
@@ -75,14 +79,14 @@
     display: block;
     text-align: center;
     margin-top: 10px;
-    color: #1e88e5; /* Blue link color */
+    color: #1e88e5; 
     text-decoration: none;
     font-size: 0.9em; 
     transition: color 0.3s;
   }
   
   .link-classname:hover {
-    color: #1976d2; /* Darker blue on hover */
+    color: #1976d2; 
   }
   
   @media (max-width: 768px) {
@@ -114,4 +118,3 @@
       padding: 10px;
     }
   }
-  
