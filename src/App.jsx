@@ -11,8 +11,9 @@ import Payment from './components/Payment';
 import Confirmation from './components/Confirmation';
 import TermsAndConditions from './Pages/TermsAndConditions'; 
 import Login from './Pages/Login'; 
-import UserProfile from './components/UserProfile';
-import SignUp from './Pages/SignUp'; 
+import UserProfile from './Pages/UserProfile';
+import SignUp from './Pages/SignUp';
+import BookingHistory from './components/BookingHistory'; 
 import { AuthProvider } from './context/AuthContext'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
 import NotFound from './Pages/NotFound'; 
@@ -51,6 +52,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Confirmation />
+                </ProtectedRoute>
+              } 
+            />
+
+            <Route 
+              path="/BookingHistory" 
+              element={
+                <ProtectedRoute>
+                  <BookingHistory />
                 </ProtectedRoute>
               } 
             />

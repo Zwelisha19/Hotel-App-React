@@ -7,7 +7,7 @@ const UserProfile = () => {
     <div className="user-profile-container">
       <h1>User Profile</h1>
       <div className="profile-links">
-        <Link to="/booking-history">Booking History</Link>
+        <Link to="/BookingHistory">Booking History</Link>
         <Link to="/update-profile">Update Profile</Link>
         <Link to="/rate-hotel">Rate the Hotel</Link>
       </div>
