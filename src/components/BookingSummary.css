@@ -3,15 +3,15 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px; /* Limit width for better readability */
-    margin: auto; /* Center the component */
+    max-width: 600px; 
+    margin: auto; 
   }
   
   .booking-summary h1 {
     margin-bottom: 20px;
     font-size: 1.8em;
     color: #333;
-    text-align: center; /* Center the title */
+    text-align: center; 
   }
   
   .booking-summary p {
@@ -27,12 +27,12 @@
   }
   
   .booking-summary .details p {
-    font-weight: bold; /* Highlight detail labels */
+    font-weight: bold;
     color: #333;
   }
   
   .booking-summary .summary-value {
-    color: #007BFF; /* Accent color for values */
+    color: #007BFF; 
   }
   
   .booking-summary button {
@@ -49,10 +49,10 @@
   }
   
   .booking-summary button:hover {
-    background-color: #4b9ed9; /* Darker shade on hover */
+    background-color: #4b9ed9; 
   }
   
-  /* Responsive design */
+ 
   @media (max-width: 600px) {
     .booking-summary {
       padding: 15px;
