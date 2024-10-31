@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebaseConfig";  
+import './ForgotPassword.css'; 
 
 function ForgotPassword() {
     const navigate = useNavigate();
+    const [message, setMessage] = useState(""); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -12,10 +14,10 @@ function ForgotPassword() {
 
         try {
             await sendPasswordResetEmail(auth, emailVal);  
-            alert("Check your email");
+            setMessage("Check your email for password reset instructions."); 
             navigate("Login");
         } catch (err) {
-            alert("Error: " + err.message);
+            setMessage("Error: " + err.message); 
         }
     };
 
@@ -26,6 +28,7 @@ function ForgotPassword() {
                 <input name="email" type="email" placeholder="Enter your email" required />
                 <button type="submit">Reset</button>
             </form>
+            {message && <p className="message">{message}</p>} 
         </div>
     );
 }

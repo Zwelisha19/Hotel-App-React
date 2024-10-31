@@ -1,7 +1,4 @@
 
-
-
-  
   body {
     height: 100%;
     margin: 0; 
@@ -31,10 +28,14 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); 
     width: 100%;
     max-width: 400px; 
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
   }
   
   .form-group {
     margin-bottom: 15px;
+    width: 100%; 
   }
   
   .form-label {
@@ -59,7 +60,6 @@
   }
   
   .login-button {
-    width: 100%;
     padding: 10px;
     background-color: #388e3c; 
     border: none;
@@ -68,6 +68,7 @@
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    width: 100%; 
   }
   
   .login-button:hover {
@@ -88,7 +89,16 @@
   .link-classname:hover {
     color: #1976d2; 
   }
+  .error-text {
+    color: red; 
+    margin-top: 10px;
+    font-size: 0.875rem; 
+    text-align: center;
+  }
   
+
+
+
   @media (max-width: 768px) {
     .login-title {
       font-size: 2em;
@@ -118,3 +128,4 @@
       padding: 10px;
     }
   }
+  

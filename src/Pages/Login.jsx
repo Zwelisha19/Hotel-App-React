@@ -7,24 +7,22 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); 
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMessage(''); 
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/RoomsList'); 
     } catch (error) {
-      alert('Failed to login: ' + error.message);
+      setErrorMessage('Invalid email or password. Please try again.'); 
     }
 
     console.log('Login:', { email, password });
   };
-
-  const handleReset = () => {
-    navigate('/reset');
-  }
 
   return (
     <div className="login-container">
@@ -50,9 +48,15 @@ const Login = () => {
             required
           />
         </div>
-        <Link to={"/reset"} className='link-classname'><p onClick={handleReset}>Forgot Password?</p></Link>
+        <Link to="/ForgotPassword" className='link-classname'>
+          <p>Forgot Password?</p>
+        </Link>
         <button type="submit" className="login-button">Login</button>
-        <Link to={"/signup"} className='link-classname'>Don't have an account? Sign Up</Link>
+        <Link to="/signup" className='link-classname'>Don't have an account? Sign Up</Link>
+
+        {errorMessage && ( 
+          <p className="error-text">{errorMessage}</p>
+        )}
       </form>
     </div>
   );
