@@ -1,0 +1,15 @@
+.user-profile-container {
+    text-align: center;
+  }
+  
+  .profile-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .profile-links a {
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+  }

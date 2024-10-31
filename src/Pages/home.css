@@ -1,12 +1,12 @@
 .home-container {
     max-width: 100vw;
     max-height: 1000vh;
-    border: 2px solid black;
+   
 }
 .top-div {
     max-width: 100vw;
     height: 50px;
-    border: 2px solid black;
+   
     display: flex;
     background-color: #768F66;
     justify-content: flex-end;
@@ -51,6 +51,7 @@
     color: white;
     border-radius: 5px;
     background-color: #768F66;
+   
     border: none;
     margin-top: 5px;
     cursor: pointer;
@@ -63,7 +64,7 @@
     position: relative;
     height: 90vh;
     max-width: 100vw;
-    border: 2px solid black;
+
     
 }
 .background-div img {
@@ -117,7 +118,7 @@
     width: 100%; 
     max-width: 100vw;
     height: 500px;
-    border: 1px solid black;
+  
 }
 .each-room-image {
     width: 100%;

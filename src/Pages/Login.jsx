@@ -14,7 +14,6 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert('Successfully logged in');
       navigate('/RoomsList'); 
     } catch (error) {
       alert('Failed to login: ' + error.message);

@@ -11,6 +11,7 @@ import Payment from './components/Payment';
 import Confirmation from './components/Confirmation';
 import TermsAndConditions from './Pages/TermsAndConditions'; 
 import Login from './Pages/Login'; 
+import UserProfile from './components/UserProfile';
 import SignUp from './Pages/SignUp'; 
 import { AuthProvider } from './context/AuthContext'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
@@ -25,7 +26,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/RoomsList" element={<RoomsList />} />
             <Route path="/Login" element={<Login />} /> 
-            <Route path="/SignUp" element={<SignUp />} /> 
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/UserProfile" element={<UserProfile/>}></Route> 
 
           
             <Route 

@@ -7,11 +7,27 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background-color: #55BAF2;
+  background-color: #768F66;
   color: white;
   border-radius: 8px;
   margin-bottom: 20px;
 }
+
+.profile-btn{
+  width: 85px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.profile-btn:hover {
+  background-color: #45a049;
+}
+
 
 .navbar img {
   height: 100px;
