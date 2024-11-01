@@ -1,149 +1,53 @@
-/*
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './Pages/home.jsx';
-// import Login from './Pages/login.jsx';
-// import SignUp from './Pages/signup.jsx';
-// import ForgotPassword from './Pages/reset.jsx';
-// import Room from './Pages/rooms.jsx';
-// import NotFound from './Pages/notFound.jsx';
-// import BookRoom from './Pages/bookroom.jsx';
-import RoomsList from './components/RoomsList.jsx';
-import BookingSummary from './components/BookingSummary';
-
-
-function App() {
-  
-
-  return (
-    <div className='App'>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/RoomsList" element={<RoomsList/>}/> */
-        // <Route path="/RoomsList" element={<RoomsList />} />
-        // <Route path="/booking-summary" element={<BookingSummary />} />
-        /* <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/Admin" element={<Admin />} />
-        <Route path="/reset" element={<ForgotPassword />} />
-        {/* <Route path="/rooms" element={<Room />} /> */
-        /* <Route path="/bookroom" element={<BookRoom />} />
-        <Route path="/notFound" element={<NotFound />} />  */
-//       </Routes>
-//     </Router>
-//   </div>
-//   )
-// }
-
-// export default App
-
-
-
-/*
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import Home from './Pages/home.jsx';
-
-import RoomsList from './components/RoomsList.jsx';
-import BookingSummary from './components/BookingSummary';
-
-
-function App() {
-  
-
-  return (
-    <div className='App'>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/RoomsList" element={<RoomsList />} />
-        <Route path="/booking-summary" element={<BookingSummary />} />
-     
-      </Routes>
-    </Router>
-  </div>
-  )
-}
-
-export default App
-
-*/
-
-
-
-
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import './App.css';
-// import Home from './Pages/home.jsx';
-// import RoomsList from './components/RoomsList.jsx';
-// import BookingSummary from './components/BookingSummary';
-// import Payment from './components/Payment'; // Import the Payment component
-// import Confirmation from './components/Confirmation'; // Import the Confirmation component
-
-// function App() {
-//   return (
-//     <div className='App'>
-//       <Router>
-//         <Routes>
-//           <Route path="/" element={<Home />} />
-//           <Route path="/RoomsList" element={<RoomsList />} />
-//           <Route path="/booking-summary" element={<BookingSummary />} />
-//           <Route path="/Payment" element={<Payment />} /> {/* Add Payment route */}
-//           <Route path="/Confirmation" element={<Confirmation />} /> {/* Add Confirmation route */}
-//         </Routes>
-//       </Router>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import Home from './Pages/home.jsx';
-import RoomsList from './components/RoomsList.jsx';
+import Home from './Pages/Home';
+import RoomsList from './components/RoomsList';
 import BookingSummary from './components/BookingSummary';
 import Payment from './components/Payment';
 import Confirmation from './components/Confirmation';
-import TermsAndConditions from './Pages/TermsAndConditions'; // Import TermsAndConditions page
+import TermsAndConditions from './Pages/TermsAndConditions';
+import Login from './Pages/Login';
+import UserProfile from './Pages/UserProfile';
+import SignUp from './Pages/SignUp';
+import UpdateProfile from './components/UpdateProfile';
+import BookingHistory from './components/BookingHistory';
+import RateHotel from './components/RateHotel';
+import ForgotPassword from './Pages/ForgotPassword';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import NotFound from './Pages/NotFound';
+import MapComponent from './components/Map';
 
 function App() {
   return (
-    <div className='App'>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/RoomsList" element={<RoomsList />} />
-          <Route path="/booking-summary" element={<BookingSummary />} />
-          <Route path="/Payment" element={<Payment />} />
-          <Route path="/Confirmation" element={<Confirmation />} />
-          <Route path="/terms" element={<TermsAndConditions />} /> {/* Add Terms and Conditions route */}
-        </Routes>
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className='App'>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            <Route path="/Login" element={<Login />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/map" element={<MapComponent />}/>
+            <Route path="*" element={<NotFound />} />
+
+           
+            <Route path="/RoomsList" element={<ProtectedRoute><RoomsList /></ProtectedRoute>} />
+            <Route path="/UserProfile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="/UpdateProfile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
+            <Route path="/RateHotel" element={<ProtectedRoute><RateHotel /></ProtectedRoute>} />
+            <Route path="/booking-summary" element={<ProtectedRoute><BookingSummary /></ProtectedRoute>} />
+            <Route path="/Payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+            <Route path="/confirmation" element={<ProtectedRoute><Confirmation /></ProtectedRoute>} />
+            <Route path="/BookingHistory" element={<ProtectedRoute><BookingHistory /></ProtectedRoute>} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </AuthProvider>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

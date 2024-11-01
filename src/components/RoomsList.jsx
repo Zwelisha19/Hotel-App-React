@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-
-import { useNavigate, useLocation } from 'react-router-dom';
-import { database } from '../../config/firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { database, auth } from '../config/firebaseConfig'; 
+import { useAuth } from '../context/AuthContext'; 
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setBookingDetails } from '../redux/bookingSlice';
+import { signOut } from 'firebase/auth'; 
 import './RoomList.css';
 
 const RoomsList = () => {
   const [rooms, setRooms] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
   const [checkinDate, setCheckinDate] = useState('');
   const [checkoutDate, setCheckoutDate] = useState('');
   const [guests, setGuests] = useState(1); 
+  const [maxPrice, setMaxPrice] = useState('');
+  const { currentUser } = useAuth(); 
   const navigate = useNavigate();
-  const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -20,20 +27,26 @@ const RoomsList = () => {
         const roomsData = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
+          added_on: doc.data().added_on?.toDate().toISOString() 
         }));
         setRooms(roomsData);
+        setFilteredRooms(roomsData);
       } catch (err) {
         console.error('Failed to fetch rooms:', err);
       }
     };
 
     fetchRooms();
+  }, []);
 
- 
-    const today = new Date();
-    const bookingDate = location.state?.bookingDate || today;
-    setCheckinDate(bookingDate.toISOString().split('T')[0]);
-  }, [location.state]);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); 
+      navigate('/login'); 
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
 
   const handleCheckoutChange = (e) => {
     const selectedCheckoutDate = e.target.value;
@@ -51,14 +64,45 @@ const RoomsList = () => {
       return;
     }
 
-    navigate(`/booking-summary`, { 
-      state: { 
-        checkinDate, 
-        checkoutDate, 
-        guests, 
-        room 
-      } 
+    if (!room.status) {
+      alert("This room is currently unavailable for booking.");
+      return;
+    }
+
+    const checkIn = new Date(checkinDate);
+    const checkOut = new Date(checkoutDate);
+    const numberOfNights = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
+    const totalPrice = numberOfNights * room.price;
+
+    dispatch(setBookingDetails({
+      checkinDate,
+      checkoutDate,
+      guests,
+      room: {
+        ...room,
+        added_on: room.added_on ? room.added_on : null 
+      },
+      totalPrice
+    }));
+    navigate(`/booking-summary`, {
+      state: {
+        checkinDate,
+        checkoutDate,
+        guests,
+        room,
+        totalPrice
+      }
     });
+  };
+
+  const handleSearch = () => {
+    let filtered = rooms;
+
+    if (maxPrice) {
+      filtered = filtered.filter(room => room.price <= maxPrice);
+    }
+
+    setFilteredRooms(filtered);
   };
 
   const today = new Date().toISOString().split('T')[0];
@@ -67,6 +111,10 @@ const RoomsList = () => {
     <div className="rooms-list-container">
       <nav className="navbar">
         <img src="src/assets/images/Logo.PNG" alt="logo" />
+        <Link to="#" onClick={handleLogout}>Logout</Link>
+        <button className="profile-btn" onClick={() => navigate('/UserProfile')}>
+          User Profile
+        </button>
       </nav>
 
       <div className='checkin-div'>
@@ -99,7 +147,6 @@ const RoomsList = () => {
               onChange={(e) => setGuests(e.target.value)}
               required
             >
-             
               {[...Array(4)].map((_, index) => (
                 <option key={index + 1} value={index + 1}>
                   {index + 1}
@@ -107,59 +154,60 @@ const RoomsList = () => {
               ))}
             </select>
           </div>
+          <div className='search-div'>
+            <label htmlFor="max-price">Max Price</label>
+            <input
+              type="number"
+              id="max-price"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+            <button className='search-button' onClick={handleSearch}>Search</button>
+          </div>
         </div>
       </div>
 
       <div className="rooms-list">
-        {rooms.map(room => (
-          <div key={room.id} className="room-item">
-            <div className='title-image-div'>
-              <h1>{room.name}</h1>
-              <div className='room-image-div'>
-                <img src={room.image} alt="Room" />
-              </div>
-            </div>
-            <div className='room-details-div'>
-              <div className='room-description-div'>
-                <p>{room.description}</p>
-              </div>
-              <div className='room-price-div'>
-                <div className='number-of-guests-div'>
-                  <p>Max Guests: 4</p>
-                </div>
-                <div className='price-book-now-button-div'>
-                  <p className='price-text'>
-                    <strong>R{room.price}</strong><br />
-                    per night
-                  </p>
-                  <button className='book-btn' onClick={() => handleBookNow(room)}>Book Now</button>
+        {filteredRooms.length > 0 ? (
+          filteredRooms.map(room => (
+            <div key={room.id} className={`room-item ${!room.status ? 'room-unavailable' : ''}`}>
+              <div className='title-image-div'>
+                <h1>{room.name}</h1>
+                <div className='room-image-div'>
+                  <img src={room.image} alt="Room" />
                 </div>
               </div>
+              <div className='room-details-div'>
+                <div className='room-description-div'>
+                  <p>{room.description}</p>
+                </div>
+                <div className='room-price-div'>
+                  <div className='number-of-guests-div'>
+                    <p>Max Guests: {room.beds}</p>
+                  </div>
+                  <div className='price-book-now-button-div'>
+                    <p className='price-text'>
+                      <strong>R{room.price}</strong><br />
+                      per night
+                    </p>
+                    <button 
+                      className='book-btn' 
+                      onClick={() => handleBookNow(room)} 
+                    >
+                      Book Now
+                    </button>
+                    {!room.status && <p className="unavailable-text">Currently Unavailable</p>}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No rooms available.</p>
+        )}
       </div>
     </div>
   );
 };
 
 export default RoomsList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
