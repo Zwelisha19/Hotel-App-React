@@ -17,6 +17,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './Pages/NotFound';
+import MapComponent from './components/Map';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/map" element={<MapComponent />}/>
             <Route path="*" element={<NotFound />} />
 
            
