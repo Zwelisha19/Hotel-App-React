@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { database } from '../config/firebaseConfig';
+import { useNavigate } from 'react-router-dom';
+import { database, auth } from '../config/firebaseConfig'; 
 import { useAuth } from '../context/AuthContext'; 
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setBookingDetails } from '../redux/bookingSlice';
+import { signOut } from 'firebase/auth'; 
 import './RoomList.css';
 
 const RoomsList = () => {
@@ -14,7 +18,7 @@ const RoomsList = () => {
   const [maxPrice, setMaxPrice] = useState('');
   const { currentUser } = useAuth(); 
   const navigate = useNavigate();
-  const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -23,6 +27,7 @@ const RoomsList = () => {
         const roomsData = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
+          added_on: doc.data().added_on?.toDate().toISOString() 
         }));
         setRooms(roomsData);
         setFilteredRooms(roomsData);
@@ -32,11 +37,16 @@ const RoomsList = () => {
     };
 
     fetchRooms();
+  }, []);
 
-    const today = new Date();
-    const bookingDate = location.state?.bookingDate || today;
-    setCheckinDate(bookingDate.toISOString().split('T')[0]);
-  }, [location.state]);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); 
+      navigate('/login'); 
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
 
   const handleCheckoutChange = (e) => {
     const selectedCheckoutDate = e.target.value;
@@ -59,13 +69,29 @@ const RoomsList = () => {
       return;
     }
 
-    navigate(`/booking-summary`, { 
-      state: { 
-        checkinDate, 
-        checkoutDate, 
-        guests, 
-        room 
-      } 
+    const checkIn = new Date(checkinDate);
+    const checkOut = new Date(checkoutDate);
+    const numberOfNights = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
+    const totalPrice = numberOfNights * room.price;
+
+    dispatch(setBookingDetails({
+      checkinDate,
+      checkoutDate,
+      guests,
+      room: {
+        ...room,
+        added_on: room.added_on ? room.added_on : null 
+      },
+      totalPrice
+    }));
+    navigate(`/booking-summary`, {
+      state: {
+        checkinDate,
+        checkoutDate,
+        guests,
+        room,
+        totalPrice
+      }
     });
   };
 
@@ -85,6 +111,7 @@ const RoomsList = () => {
     <div className="rooms-list-container">
       <nav className="navbar">
         <img src="src/assets/images/Logo.PNG" alt="logo" />
+        <Link to="#" onClick={handleLogout}>Logout</Link>
         <button className="profile-btn" onClick={() => navigate('/UserProfile')}>
           User Profile
         </button>
@@ -184,7 +211,3 @@ const RoomsList = () => {
 };
 
 export default RoomsList;
-
-
-
-

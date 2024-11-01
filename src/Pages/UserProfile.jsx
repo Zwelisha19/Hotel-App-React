@@ -10,6 +10,7 @@ const UserProfile = () => {
         <Link to="/BookingHistory">Booking History</Link>
         <Link to="/UpdateProfile">Update Profile</Link>
         <Link to="/RateHotel">Rate the Hotel</Link>
+        <Link to="/RoomsList">Back</Link>
       </div>
     </div>
   );

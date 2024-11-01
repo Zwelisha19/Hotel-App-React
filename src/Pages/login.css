@@ -80,14 +80,14 @@
     display: block;
     text-align: center;
     margin-top: 10px;
-    color: #1e88e5; 
+    color: green; 
     text-decoration: none;
     font-size: 0.9em; 
     transition: color 0.3s;
   }
   
   .link-classname:hover {
-    color: #1976d2; 
+    color: darkgreen; 
   }
   .error-text {
     color: red; 

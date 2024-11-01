@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { database } from "../config/firebaseConfig";
+import { Link } from "react-router-dom";
 import "./RateHotel.css";
 
 const RateHotel = () => {
@@ -51,6 +52,7 @@ const RateHotel = () => {
   return (
     <div className="rate-hotel">
       <h2>Rate Our Hotel</h2>
+      <Link to="/RoomsList">Back</Link>
       <form onSubmit={handleSubmit}>
         <label>
           Rating:
