@@ -7,15 +7,13 @@ import './ForgotPassword.css';
 function ForgotPassword() {
     const navigate = useNavigate();
     const [message, setMessage] = useState(""); 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const emailVal = e.target.email.value;  
-
         try {
             await sendPasswordResetEmail(auth, emailVal);  
             setMessage("Check your email for password reset instructions."); 
-            navigate("Login");
+            navigate("/Login");
         } catch (err) {
             setMessage("Error: " + err.message); 
         }

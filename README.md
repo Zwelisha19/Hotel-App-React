@@ -41,7 +41,7 @@ This is a hotel booking application built with React, Firebase, and Redux. The a
 ```
 3. Navigate to dev branch:  
 ```bash
-     cd Hotel-App-React
+     cd dev
 ```
 4. Install the required dependencies:  
 ```bash
