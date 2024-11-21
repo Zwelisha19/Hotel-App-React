@@ -1,0 +1,212 @@
+.rooms-list-container {
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #768F66;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.profile-btn{
+  width: 85px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.profile-btn:hover {
+  background-color: #45a049;
+}
+
+
+.navbar img {
+  height: 100px;
+  width: auto;
+}
+
+.checkin-div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.checkin-form {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.num-of-days,
+.guest-div,
+.submit-btn-div {
+  margin-right: 10px;
+}
+
+.num-of-days input[type="date"],
+.guest-div input[type="number"] {
+  width: 120px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+
+.search-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none; 
+  border-radius: 5px;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+.search-button:hover {
+  background-color: #45a049;
+}
+
+.search-button:focus {
+  outline: none; 
+}
+
+.search-button:disabled {
+  background-color: #cccccc; 
+  cursor: not-allowed; 
+}
+
+.submit-btn {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #55BAF2;
+  color: white;
+  border: none;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #4b9ed9;
+}
+
+.available-information {
+  height: 8vh;
+  width: 100%;
+  background-color: #55BAF2;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.available-information h1 {
+  color: white;
+  margin: 0;
+}
+
+.rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.room-item {
+  display: flex;
+  height: 300px;
+  width: 100%;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.title-image-div {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: #e6e6e6;
+}
+
+.room-title-div {
+  padding: 10px;
+  background-color: #ffcc00;
+}
+
+.room-image-div {
+  height: 90%;
+  overflow: hidden;
+}
+
+.room-image-div img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.room-details-div {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
+}
+
+.room-price-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; 
+}
+
+.number-of-guests-div {
+  text-align: left;
+}
+
+.price-book-now-button-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.price-text {
+  margin: 0;
+}
+
+.book-btn {
+  width: 90px;
+  height: 35px;
+  color: white;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  font-weight: bold;
+  border: none;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.book-btn:hover {
+  background-color: #45a049;
+}
+
+
+.room-unavailable {
+  background-color: #e0e0e0; 
+  opacity: 0.6; 
+  pointer-events: none; 
+}

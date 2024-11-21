@@ -1,0 +1,23 @@
+.payment-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .payment-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .payment-container p {
+    margin: 5px 0;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .success-message {
+    margin-top: 20px;
+  }
+  
