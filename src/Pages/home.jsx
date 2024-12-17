@@ -122,7 +122,7 @@ function Home() {
                 <div className='amenity-item'>
                     <i className="fa-solid fa-utensils"></i>
                     <p>Meal Service</p>
-                    <p>Enjoy a variety of delicious meals, including breakfast, lunch, and supper, served fresh daily.</p>
+                    {/* <p>Enjoy a variety of delicious meals, including breakfast, lunch, and supper, served fresh daily.</p> */}
                 </div>
                 <div className='amenity-item'>
                     <i className="fa-solid fa-spa"></i>
