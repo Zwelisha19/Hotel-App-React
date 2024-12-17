@@ -122,7 +122,7 @@ function Home() {
                 <div className='amenity-item'>
                     <i className="fa-solid fa-utensils"></i>
                     <p>Meal Service</p>
-                    {/* <p>Enjoy a variety of delicious meals, including breakfast, lunch, and supper, served fresh daily.</p> */}
+                  
                 </div>
                 <div className='amenity-item'>
                     <i className="fa-solid fa-spa"></i>
@@ -155,19 +155,45 @@ function Home() {
                 </div>
             </div>
             
+
+
             <div className='reviews-section'>
-                <h2>Customer Reviews</h2>
+                <h2>What Our Customers Are Saying</h2>
                 {reviews.length > 0 ? (
-                    reviews.map(review => (
-                        <div key={review.id} className='review-item'>
-                            <p><strong>{review.name}</strong> ({review.rating}/5)</p>
-                            <p>{review.comment}</p>
-                        </div>
-                    ))
+                    <div className='reviews-grid'>
+                        {reviews.map((review) => (
+                            <div key={review.id} className='review-card'>
+                                <div className='review-rating'>
+                                    <span className='star-rating'>
+                                        {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                                    </span>
+                                </div>
+                                <div className='review-body'>
+                                    <p className='review-comment'>" {review.comment} "</p>
+                                </div>
+                                <div className='review-footer'>
+                                    <span className='review-author'>{review.name}</span>
+                                    <span className='review-date'>
+                                        Reviewed on {new Date(review.timestamp?.toDate()).toLocaleDateString()}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 ) : (
-                    <p>No reviews available.</p>
+                    <p className='no-reviews'>No reviews available yet.</p>
                 )}
             </div>
+
+
+
+
+
+
+
+
+
+
 
             <div className='location-div'>
                 <Link to="/map">
