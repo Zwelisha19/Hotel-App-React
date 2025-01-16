@@ -49,9 +49,6 @@ function Home() {
                     </button>
                 </div>
                 <div>
-                    <Link to="/map">
-                        <p>Map</p>
-                    </Link>
                     <Link to={"/Login"}>
                         <button 
                             className='register-btn' 
